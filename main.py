@@ -47,6 +47,9 @@ def get_data():
 def selecting_random_quotes(name):
     """Takes the name of the person and generates a personalised message"""
     file_for_message = random.choice(os.listdir("./letter_templates"))
+    with open(f"./letter_templates/{file_for_message}") as temp_file:
+        content = (temp_file.read()).replace('[NAME]', name)
+    return content
 
 
 def send_email(subject, message, email):
@@ -56,3 +59,14 @@ def send_email(subject, message, email):
         connection.login(user=MY_EMAIL, password=MY_PASSWORD)
         connection.sendmail(from_addr=MY_EMAIL, to_addrs=email, msg=f"Subject:{subject} \n\n {message}")
     print("Email sent successfully!")
+
+
+day, month = present_day()
+list_of_people = get_data()
+
+for elements in list_of_people:
+    if elements['DD'] == day:
+        receiver_name = elements['Name']
+        receiver_email = elements['email']
+        message_to_send = selecting_random_quotes(receiver_name)
+        send_email(subject=f"Happy Birthday {receiver_name}", message=message_to_send, email=receiver_email)
