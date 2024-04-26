@@ -4,8 +4,8 @@ import smtplib
 import random
 import os
 
-MY_EMAIL = "rahuldhingraajd@gmail.com"
-MY_PASSWORD = "xcbjwfvrioofdazw"
+MY_EMAIL = "r**********d@gmail.com"
+MY_PASSWORD = "**********"
 
 
 def new_data():
